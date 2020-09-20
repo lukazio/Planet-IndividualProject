@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Planet - Home</title>
+        <title>Planet - Profile</title>
         
         <?php
         require 'modules/link.php';
@@ -18,10 +18,6 @@
     ?>
     
     <body style="margin-top:80px;" class="mx-3 mx-lg-5">
-        <?php   //test can remove
-        echo $_SESSION['username'];
-        echo "<br>";
-        echo $_SESSION['email'];
-        ?>
+        
     </body>
 </html>
