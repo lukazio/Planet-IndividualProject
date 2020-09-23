@@ -42,8 +42,7 @@
                     
                     if($noteboardResult = mysqli_query($conn,$noteboardSql)){
                         if(mysqli_num_rows($noteboardResult) > 0){
-                            while($row = mysqli_fetch_array($noteboardResult)){
-                                //TODO: Display a nice box link to each noteboard with option to delete it beside
+                            while($row = mysqli_fetch_assoc($noteboardResult)){
                                 echo '<div class="btn-group btn-group-toggle mb-2">'
                                     . '<a href="noteboard.php?id='.$row['board_id'].'" class="btn btn-primary">';
                                         if(strlen($row['board_name']) > 35){
@@ -54,7 +53,7 @@
                                         }
                                 echo '</a>'
                                     . '<form action="action/deleteboard_action.php" method="post">'
-                                        . '<button type="submit" onclick="return confirm(\'Confirm noteboard deletion?\')" name="deleteboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'
+                                        . '<button type="submit" onclick="return confirm(\'Confirm noteboard deletion?\nEveryone that has joined this noteboard will lose everything here!\')" name="deleteboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'
                                     . '</form>'
                                    . '</div><br>';
                             }
@@ -71,12 +70,39 @@
                 </div>
                 <div class="col-12 col-lg-6 mt-4 mt-lg-0">
                     <h3 class="pb-3 mb-3" style="border-bottom: 1px solid;">Joined Noteboards</h3>
-                    <p>Noteboard list</p>
-                    <p>Noteboard list</p>
-                    <p>Noteboard list</p>
-                    <p>Noteboard list</p>
-                    <p>Noteboard list</p>
-                    <p>Noteboard list</p>
+                    <?php
+                    $joinedBoardsSql = "SELECT * FROM user_noteboard WHERE user_id=(SELECT user_id FROM user WHERE user_email='$currentEmail');";
+                    
+                    if($joinedBoardsResult = mysqli_query($conn,$joinedBoardsSql)){
+                        if(mysqli_num_rows($joinedBoardsResult) > 0){
+                            while($row = mysqli_fetch_array($joinedBoardsResult)){
+                                $currentBoardId = $row['board_id'];
+                                $boardNameSql = "SELECT board_name FROM noteboard WHERE board_id='$currentBoardId';";
+                                $row_board = mysqli_fetch_assoc(mysqli_query($conn,$boardNameSql));
+                                        
+                                echo '<div class="btn-group btn-group-toggle mb-2">'
+                                    . '<a href="noteboard.php?id='.$row['board_id'].'" class="btn btn-info">';
+                                        if(strlen($row_board['board_name']) > 35){
+                                            echo substr($row_board['board_name'],0,35).'...';
+                                        }
+                                        else{
+                                            echo $row_board['board_name'];
+                                        }
+                                echo '</a>'
+                                    . '<form action="action/leaveboard_action.php" method="post">'
+                                        . '<button type="submit" onclick="return confirm(\'Are you sure you want to leave this noteboard?\')" name="leaveboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i></a>'
+                                    . '</form>'
+                                   . '</div><br>';
+                            }
+                        }
+                        else{
+                            echo '<h4 class="text-info">You have not joined any noteboards.</h4>';
+                        }
+                    }
+                    else{
+                        echo "database error: can't retrieve your noteboard list<br><b>ERROR: </b>".mysqli_error($conn);
+                    }
+                    ?>
                 </div>
             </div>
         </div>
