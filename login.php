@@ -30,7 +30,7 @@
 			</div>
 			<div class="form-group pt-2">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="pw" placeholder="Enter password" maxlength="20" required>
+                            <input type="password" class="form-control" id="password" name="pw" placeholder="Enter password" pattern="[a-zA-Z0-9]+" maxlength="20" required>
 			</div>
                         <div class="text-center">
                             <?php

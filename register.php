@@ -23,6 +23,7 @@
                 <div class="card-body">
                     <h1 class="card-title text-center">Welcome, New User!</h1>
                     <p class="card-subtitle text-center">But first, we need some details.</p>
+                    <p class="mt-2 mt-sm-3 mt-md-5 card-subtitle text-center"><b>NOTE: </b>Username and password must be alphanumerical</p>
                     
                     <form class="mx-2 mx-md-3 mx-lg-5 pt-5" action="action/register_action.php" method="post">
                         <div class="form-group pt-2">
@@ -31,15 +32,15 @@
 			</div>
                         <div class="form-group pt-2">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" maxlength="12" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" pattern="[a-zA-Z0-9]+" maxlength="12" required>
 			</div>
 			<div class="form-group pt-2">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="pw" placeholder="Enter password" maxlength="20" required>
+                            <input type="password" class="form-control" id="password" name="pw" placeholder="Enter password" pattern="[a-zA-Z0-9]+" maxlength="20" required>
 			</div>
                         <div class="form-group pt-2">
                             <label for="cfm-password">Confirm Password</label>
-                            <input type="password" class="form-control" id="cfm-password" name="cfm-pw" placeholder="Confirm password" maxlength="20" required>
+                            <input type="password" class="form-control" id="cfm-password" name="cfm-pw" placeholder="Confirm password" pattern="[a-zA-Z0-9]+" maxlength="20" required>
 			</div>
                         <div class="text-center">
                             <?php

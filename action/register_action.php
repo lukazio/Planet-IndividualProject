@@ -4,7 +4,7 @@ if(isset($_POST['register-submit'])){
     require '../modules/dbconnect.php';
     
     $email = $_POST['email'];
-    $username = $_POST['username'];
+    $username = trim($_POST['username']);
     $password = $_POST['pw'];
     $cfm_password = $_POST['cfm-pw'];
     
