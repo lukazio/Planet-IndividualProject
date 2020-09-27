@@ -11,7 +11,6 @@ if(isset($_POST['register-submit'])){
     if(empty($email) || empty($username) || empty($password) || empty($cfm_password)){
         //No empty fields error
         $_SESSION['register-error'] = 1;
-        header("Location: ../register.php");
     }
     else{
         //Prepare statement
@@ -20,7 +19,6 @@ if(isset($_POST['register-submit'])){
         if(!mysqli_stmt_prepare($stmt,$selectSql)){
             //Statement preparation error
             $_SESSION['register-error'] = 2;
-            header("Location: ../register.php");
         }
         else{
             $INPUT_ERROR = false;
@@ -39,19 +37,16 @@ if(isset($_POST['register-submit'])){
                 //Different password and confirm password error
                 $_SESSION['register-error'] = 3;
                 $INPUT_ERROR = true;
-                header("Location: ../register.php");
             }
             else if($emailCheckResult){
                 //Email exists error
                 $_SESSION['register-error'] = 4;
                 $INPUT_ERROR = true;
-                header("Location: ../register.php");
             }
             else if($nameCheckResult){
                 //Username exists error
                 $_SESSION['register-error'] = 5;
                 $INPUT_ERROR = true;
-                header("Location: ../register.php");
             }
             
             //Success
@@ -59,10 +54,14 @@ if(isset($_POST['register-submit'])){
                 $password = password_hash($password,PASSWORD_ARGON2ID);
                 $insertSql = "INSERT INTO user(user_name,user_email,user_password) VALUES('$username','$email','$password');";
                 mysqli_query($conn,$insertSql);
+                
                 header("Location: ../login.php");
+                exit();
             }
         }
     }
+    
+    header("Location: ../register.php");
 }
 else{
     header("Location: ../index.php");

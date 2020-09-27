@@ -53,13 +53,13 @@
                                         }
                                 echo '</a>'
                                     . '<form action="action/deleteboard_action.php" method="post">'
-                                        . '<button type="submit" onclick="return confirm(\'Confirm noteboard deletion?\nEveryone that has joined this noteboard will lose everything here!\')" name="deleteboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'
+                                        . '<button type="submit" onclick="return confirm(\'Confirm noteboard deletion?\nEveryone that has joined this noteboard will lose everything here!\')" name="deleteboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>'
                                     . '</form>'
                                    . '</div><br>';
                             }
                         }
                         else{
-                            echo '<h4 class="text-info">No noteboards found!</h4>';
+                            echo '<h4 class="text-info">No noteboards found.</h4>';
                             echo '<h6 class="text-info">Create a new noteboard with the mini form above!</h6>';
                         }
                     }

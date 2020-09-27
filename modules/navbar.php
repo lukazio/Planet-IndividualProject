@@ -25,7 +25,15 @@ session_start();
             <li class="nav-item active dropdown">
                 <a class="nav-link dropdown-toggle" href="" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="img/profile_icon.png" width="35" height="35" class="d-none d-md-inline-block align-middle mr-2" alt="">
-                    <?php echo $_SESSION['username']; ?>
+                    <?php
+                    $countInviteSql = "SELECT COUNT(*) FROM invite WHERE invite_to='".$_SESSION['email']."'";
+                    $countInviteRow = mysqli_fetch_array(mysqli_query($conn,$countInviteSql));
+                    $countInvite = intval($countInviteRow[0]);
+                    
+                    echo $_SESSION['username'];
+                    if($countInvite > 0)
+                        echo ' <span class="badge badge-danger">'.$countInvite.'</span>';
+                    ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
                     <a class="dropdown-item" href="profile.php">Profile</a>

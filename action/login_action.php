@@ -9,7 +9,6 @@ if(isset($_POST['login-submit'])){
     if(empty($email) || empty($password)){
         //No empty fields error
         $_SESSION['login-error'] = 1;
-        header("Location: ../login.php");
     }
     else{
         //Prepare statement
@@ -18,7 +17,6 @@ if(isset($_POST['login-submit'])){
         if(!mysqli_stmt_prepare($stmt,$selectSql)){
             //Statement preparation error
             $_SESSION['login-error'] = 2;
-            header("Location: ../login.php");
         }
         else{
             mysqli_stmt_bind_param($stmt,"ss",$email,$password);
@@ -40,14 +38,16 @@ if(isset($_POST['login-submit'])){
                 $_SESSION['username'] = $row['user_name'];
                 
                 header("Location: ../index.php");
+                exit();
             }
             else{
                 //Wrong email or password error
                 $_SESSION['login-error'] = 3;
-                header("Location: ../login.php");
             }
         }
     }
+    
+    header("Location: ../login.php");
 }
 else{
     header("Location: ../index.php");
