@@ -1,5 +1,6 @@
 <?php
-session_start();
+if(!isset($_SESSION))
+    session_start();
 ?>
 
 <nav class="fixed-top navbar navbar-expand-md navbar-dark bg-dark px-3 px-lg-5">
