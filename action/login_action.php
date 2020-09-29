@@ -37,6 +37,11 @@ if(isset($_POST['login-submit'])){
                 $_SESSION['email'] = $email;
                 $_SESSION['username'] = $row['user_name'];
                 
+                if(isset($_POST['email_remember']))
+                    setcookie('email',$email,'','/fyp/login.php');
+                else
+                    setcookie('email','',time()-3600,'/fyp/login.php');
+                
                 header("Location: ../index.php");
                 exit();
             }

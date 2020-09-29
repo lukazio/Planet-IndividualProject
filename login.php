@@ -26,9 +26,13 @@
                     <form class="mx-2 mx-md-3 mx-lg-5 pt-5" action="action/login_action.php" method="post">
                         <div class="form-group pt-2">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" <?php if(isset($_COOKIE['email'])){echo 'value="'.$_COOKIE['email'].'"';} ?> required>
 			</div>
-			<div class="form-group pt-2">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberEmail" name="email_remember" <?php if(isset($_COOKIE['email'])){echo 'checked';} ?>>
+                            <label class="form-check-label" for="rememberEmail">Remember</label>
+                        </div>
+			<div class="form-group pt-4">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="pw" placeholder="Enter password" pattern="[a-zA-Z0-9]+" maxlength="20" required>
 			</div>
