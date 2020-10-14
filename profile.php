@@ -112,6 +112,7 @@
                                 $nameSql = "SELECT user_name FROM user WHERE user_email='".$row['invite_from']."'";
                                 $nameRow = mysqli_fetch_assoc(mysqli_query($conn,$nameSql));
                                 $senderName = $nameRow['user_name'];
+                                $senderEmail = $row['invite_from'];
                                 
                                 //Get noteboard name
                                 $boardNameSql = "SELECT board_name FROM noteboard WHERE board_id='".$row['invite_board']."'";
@@ -121,6 +122,7 @@
                                 echo '<div class="row mb-4">';
                                     echo '<div class="col-12 col-md-7 text-wrap">';
                                         echo '<i class="fa fa-user fa-fw" aria-hidden="true"></i> <b>'.$senderName.'</b><br>';
+                                        echo '<i class="fa fa-envelope fa-fw" aria-hidden="true"></i> <b>'.$senderEmail.'</b><br>';
                                         echo '<i class="fa fa-sticky-note fa-fw" aria-hidden="true"></i> <b>'.$boardName.'</b><br>';
                                         echo '<i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> <b>'.$row['invite_datetime'].'</b><br>';
                                         echo $row['invite_msg'];

@@ -36,13 +36,13 @@ $currentUserId = $userIdResult['user_id'];
     </head>
     
     <?php
-    include 'modules/navbar.php';
+    include 'modules/navbar_noteboard.php';
     
     if(!isset($_SESSION['email']))
         header("Location: login.php");
     ?>
     
-    <body style="margin-top:80px;" class="mx-3 mx-lg-5">
+    <body style="margin-top:80px;" class="mx-3 mx-lg-5 bg-dark">
         <?php
         //Check if valid noteboard ID or not, print error if invalid
         if($error_code == 1){
