@@ -36,7 +36,7 @@ if(!isset($_SESSION))
                 <a class="nav-link dropdown-toggle" href="" title="List of members in this noteboard" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <b>Members</b>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                     <?php
                     $ownerNameSql = "SELECT user_name,user_email FROM user WHERE user_id='".$board_info['board_owner']."';";
                     $ownerNameRow = mysqli_fetch_assoc(mysqli_query($conn,$ownerNameSql));
@@ -78,7 +78,7 @@ if(!isset($_SESSION))
                 <a class="nav-link dropdown-toggle" href="" title="Pending invites for this noteboard" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <b>Pending</b>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                     <?php
                     if($error_code == 0){
                         $currentBoardId = $board_info['board_id'];
@@ -107,13 +107,20 @@ if(!isset($_SESSION))
             <?php
             if($error_code == 0){
                 if(mysqli_num_rows($ownerFormResult) == 1){
-                    echo '<form class="form-inline" action="action/inviteuser_action.php" method="post">';
-                        echo '<input type="email" class="form-control form-control-sm" name="invite_email" placeholder="Invite Email" required>';
-                        echo '<input type="text" class="form-control form-control-sm" name="invite_msg" placeholder="Message" pattern="[a-zA-Z0-9 ]+" maxlength="100" required>';
-                        echo '<input type="hidden" name="invite_board" value="'.$board_info['board_id'].'">';
-                        echo '<input type="hidden" name="invite_from" value="'.$_SESSION['email'].'">';
-                        echo '<button type="submit" class="btn btn-sm btn-success" name="inviteuser-submit" onclick="return confirm(\'Invite this user?\')"><i class="fa fa-plus" aria-hidden="true"></i></button>';
-                    echo '</form>';
+                    echo '<li class="nav-item active dropdown">'
+                            . '<a class="nav-link dropdown-toggle" href="" title="Invite new users to this noteboard" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+                                . '<b>Invite User</b>'
+                            . '</a>'
+                            . '<div class="dropdown-menu dropdown-menu-right p-2" aria-labelledby="profileDropdown">'
+                                . '<form action="action/inviteuser_action.php" method="post">'
+                                    . '<input type="email" class="form-control form-control-sm" name="invite_email" placeholder="Email" required>'
+                                    . '<input type="text" class="form-control form-control-sm" name="invite_msg" placeholder="Message" pattern="[a-zA-Z0-9 ]+" maxlength="100" required>'
+                                    . '<input type="hidden" name="invite_board" value="'.$board_info['board_id'].'">'
+                                    . '<input type="hidden" name="invite_from" value="'.$_SESSION['email'].'">'
+                                    . '<button type="submit" class="btn btn-sm btn-success" name="inviteuser-submit" onclick="return confirm(\'Invite this user?\')"><i class="fa fa-plus" aria-hidden="true"></i></button>'
+                                . '</form>'
+                            . '</div>'
+                        . '</li>';
                 }
             }
             ?>

@@ -9,7 +9,7 @@ if(isset($_POST['inviteuser-submit'])){
     $inviteMsg = trim($_POST['invite_msg']);
     
     if(empty($inviteEmail) || empty($inviteMsg))
-        header("Location: ../index.php");
+        header("Location: ../noteboard.php?id=".$inviteBoard);
     else{
         //Check if invite_email is existing user or not
         $checkUserSql = "SELECT * FROM user WHERE user_email='$inviteEmail';";

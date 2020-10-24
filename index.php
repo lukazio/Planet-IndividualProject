@@ -34,7 +34,7 @@
                     <h3 class="pb-3" style="border-bottom: 1px solid;">Your Noteboards</h3>
                     <form class="pb-3 my-3 form-inline" action="action/addboard_action.php" method="post" style="border-bottom: 1px solid;">
                         <input type="text" class="form-control" name="newboard_name" placeholder="Add New" pattern="[a-zA-Z0-9 ]+" maxlength="50" required>
-                        <button type="submit" class="btn btn-success" name="addboard-submit" onclick="return confirm('Create noteboard?')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <button type="submit" class="btn btn-success" name="addboard-submit" onclick="return confirm('Create noteboard?')" title="Add noteboard"><i class="fa fa-plus" aria-hidden="true"></i></button>
                     </form>
                     <?php
                     $currentEmail = $_SESSION['email'];
@@ -53,8 +53,17 @@
                                         }
                                 echo '</a>'
                                     . '<form action="action/deleteboard_action.php" method="post">'
-                                        . '<button type="submit" onclick="return confirm(\'Confirm noteboard deletion?\nEveryone that has joined this noteboard will lose everything here!\')" name="deleteboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>'
+                                        . '<button type="submit" title="Delete '.$row['board_name'].'" onclick="return confirm(\'Confirm to delete '.$row['board_name'].'?\nEveryone that has joined this noteboard will lose everything here!\')" name="deleteboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>'
                                     . '</form>'
+                                    . '<div class="dropdown">'
+                                        . '<button class="btn btn-secondary dropdown-toggle" type="button" title="Rename '.$row['board_name'].'" id="editBoardName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-pencil" aria-hidden="true"></i> </button>'
+                                        . '<div class="dropdown-menu" aria-labelledby="editBoardName">'
+                                            . '<form class="form-inline p-2" action="action/renameboard_action.php" method="post">'
+                                                . '<input type="text" class="form-control form-control-sm" name="editboard_name" placeholder="Edit Board Name" value="'.$row['board_name'].'" pattern="[a-zA-Z0-9 ]+" maxlength="50" required>'
+                                                . '<button type="submit" title="Save" class="btn btn-sm btn-success" name="renameboard-submit" value="'.$row['board_id'].'" onclick="return confirm(\'Confirm rename?\')"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>'
+                                            . '</form>'
+                                        . '</div>'
+                                    . '</div>'
                                    . '</div><br>';
                             }
                         }
@@ -90,7 +99,7 @@
                                         }
                                 echo '</a>'
                                     . '<form action="action/leaveboard_action.php" method="post">'
-                                        . '<button type="submit" onclick="return confirm(\'Are you sure you want to leave this noteboard?\')" name="leaveboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i></a>'
+                                        . '<button type="submit" title="Leave '.$row_board['board_name'].'" onclick="return confirm(\'Are you sure you want to leave this noteboard?\')" name="leaveboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i></a>'
                                     . '</form>'
                                    . '</div><br>';
                             }
