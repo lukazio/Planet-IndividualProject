@@ -117,7 +117,7 @@ if(!isset($_SESSION))
                                     . '<input type="text" class="form-control form-control-sm" name="invite_msg" placeholder="Message" pattern="[a-zA-Z0-9 ]+" maxlength="100" required>'
                                     . '<input type="hidden" name="invite_board" value="'.$board_info['board_id'].'">'
                                     . '<input type="hidden" name="invite_from" value="'.$_SESSION['email'].'">'
-                                    . '<button type="submit" class="btn btn-sm btn-success" name="inviteuser-submit" onclick="return confirm(\'Invite this user?\')"><i class="fa fa-plus" aria-hidden="true"></i></button>'
+                                    . '<button type="submit" class="btn btn-sm btn-success" name="inviteuser-submit" onclick="return confirm(\'Invite this user?\')"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>'
                                 . '</form>'
                             . '</div>'
                         . '</li>';

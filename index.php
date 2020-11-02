@@ -43,7 +43,7 @@
                     if($noteboardResult = mysqli_query($conn,$noteboardSql)){
                         if(mysqli_num_rows($noteboardResult) > 0){
                             while($row = mysqli_fetch_assoc($noteboardResult)){
-                                echo '<div class="btn-group btn-group-toggle mb-2">'
+                                echo '<div class="btn-group btn-group-toggle">'
                                     . '<a href="noteboard.php?id='.$row['board_id'].'" class="btn btn-primary">';
                                         if(strlen($row['board_name']) > 35){
                                             echo substr($row['board_name'],0,35).'...';
@@ -65,6 +65,14 @@
                                         . '</div>'
                                     . '</div>'
                                    . '</div><br>';
+                                //Get last updated note's datetime
+                                $lastUpdatedSql = "SELECT note_modified FROM note WHERE board_id='".$row['board_id']."' ORDER BY note_modified DESC LIMIT 1";
+                                $lastUpdatedResult = mysqli_query($conn,$lastUpdatedSql);
+                                $lastUpdatedRow = mysqli_fetch_assoc($lastUpdatedResult);
+                                if(mysqli_num_rows($lastUpdatedResult) > 0)
+                                    echo '<p class="mb-2"><small class="text-muted">Last updated on '.$lastUpdatedRow['note_modified'].'</small></p>';
+                                else
+                                    echo '<p class="mb-2"><small class="text-muted">Empty noteboard</small></p>';
                             }
                         }
                         else{
@@ -89,7 +97,7 @@
                                 $boardNameSql = "SELECT board_name FROM noteboard WHERE board_id='$currentBoardId';";
                                 $row_board = mysqli_fetch_assoc(mysqli_query($conn,$boardNameSql));
                                         
-                                echo '<div class="btn-group btn-group-toggle mb-2">'
+                                echo '<div class="btn-group btn-group-toggle">'
                                     . '<a href="noteboard.php?id='.$row['board_id'].'" class="btn btn-info">';
                                         if(strlen($row_board['board_name']) > 35){
                                             echo substr($row_board['board_name'],0,35).'...';
@@ -102,6 +110,14 @@
                                         . '<button type="submit" title="Leave '.$row_board['board_name'].'" onclick="return confirm(\'Are you sure you want to leave this noteboard?\')" name="leaveboard-submit" value="'.$row['board_id'].'" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i></a>'
                                     . '</form>'
                                    . '</div><br>';
+                                //Get last updated note's datetime
+                                $lastJoinedUpdatedSql = "SELECT note_modified FROM note WHERE board_id='".$row['board_id']."' ORDER BY note_modified DESC LIMIT 1";
+                                $lastJoinedUpdatedResult = mysqli_query($conn,$lastJoinedUpdatedSql);
+                                $lastJoinedUpdatedRow = mysqli_fetch_assoc($lastJoinedUpdatedResult);
+                                if(mysqli_num_rows($lastJoinedUpdatedResult) > 0)
+                                    echo '<p class="mb-2"><small class="text-muted">Last updated on '.$lastJoinedUpdatedRow['note_modified'].'</small></p>';
+                                else
+                                    echo '<p class="mb-2"><small class="text-muted">Empty noteboard</small></p>';
                             }
                         }
                         else{
