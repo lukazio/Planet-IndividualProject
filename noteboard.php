@@ -74,7 +74,6 @@ $currentUserId = $userIdResult['user_id'];
                 $error_code = 2;    //User is not owner or didn't join noteboard error
             
             if($error_code == 2){
-                echo $error_code;
                 echo '<h1 class="text-center text-info">You do not have permission to view this noteboard</h1>';
                 echo '<div class="text-center"><a class="h4" href="index.php">Click to return to homepage</a></div>';
             }
@@ -136,7 +135,7 @@ $currentUserId = $userIdResult['user_id'];
                         </div>
                     </div>
                     <div class="col-6 text-right p-0">
-                        <button type="button" class="btn btn-info" title="Create new note" data-toggle="modal" data-target="#newNoteModal" data-toggle-tooltip="tooltip" data-placement="left" title="Create new note"><i class="fa fa-sticky-note" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newNoteModal" data-toggle-tooltip="tooltip" data-placement="left" title="Create new note"><i class="fa fa-sticky-note" aria-hidden="true"></i></button>
                         <div class="modal fade" id="newNoteModal" tabindex="-1" role="dialog" aria-labelledby="newNoteLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -149,7 +148,7 @@ $currentUserId = $userIdResult['user_id'];
                                             <div class="row">
                                                 <div class="col-12 col-sm-7">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" name="note_title" placeholder="Note Title" pattern="[a-zA-Z0-9 ]+" maxlength="64" required>
+                                                        <textarea type="text" class="form-control" rows="4" name="note_title" placeholder="Note Title" pattern="[a-zA-Z0-9 ]+" maxlength="200" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-5">
@@ -171,7 +170,7 @@ $currentUserId = $userIdResult['user_id'];
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <textarea class="form-control" rows="12" name="note_content" placeholder="Enter your note here..."></textarea>
+                                                        <textarea class="form-control" rows="16" name="note_content" placeholder="Enter your note here..."></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,6 +200,8 @@ $currentUserId = $userIdResult['user_id'];
                         </div>
                     </div>
                 </div>
+                
+                <!-- ALERT ROW -->
                 <?php
                 if(isset($_GET['category'])){
                     $getCatNameSql = "SELECT cat_name FROM category WHERE cat_id='".$_GET['category']."';";
@@ -215,6 +216,8 @@ $currentUserId = $userIdResult['user_id'];
                        . '</div>';
                 }
                 ?>
+                
+                <!-- NOTE LIST ROW -->
                 <div class="row mt-3 rounded" id="noteSection" style="border: 2px solid gray"></div>
         <?php
             }
@@ -246,6 +249,6 @@ $currentUserId = $userIdResult['user_id'];
         setTimeout( function(){
             $('#noteSection').load('notes.php?id=' + board_id + '&category=' + category);
             refresh();
-        }, 1000);
+        }, 2000);
     }
 </script>

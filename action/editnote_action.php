@@ -1,10 +1,11 @@
 <?php
-if(isset($_POST['addnote-submit'])){
+if(isset($_POST['editnote-submit'])){
     session_start();
     require '../modules/dbconnect.php';
     
+    $note_id = $_POST['note_id'];
     $board_id = $_POST['board_id'];
-    $note_creator = $_SESSION['username'];
+    $note_editor = $_SESSION['username'];
     $note_title = trim($_POST['note_title']);
     $note_category = $_POST['note_category'];
     $note_content = addslashes($_POST['note_content']);
@@ -23,12 +24,12 @@ if(isset($_POST['addnote-submit'])){
             $note_modified = date('Y-m-d H:i:s');
             
             if(mysqli_num_rows($checkCatResult) > 0){
-                $insertNoteSql = "INSERT INTO note(board_id,note_creator,note_editor,note_title,note_category,note_content,note_modified) VALUES('$board_id','$note_creator','$note_creator','$note_title','$note_category','$note_content','$note_modified')";
-                mysqli_query($conn,$insertNoteSql);
+                $updateNoteSql = "UPDATE note SET note_editor='$note_editor',note_title='$note_title',note_category='$note_category',note_content='$note_content',note_modified='$note_modified' WHERE note_id='$note_id';";
+                mysqli_query($conn,$updateNoteSql);
             }
             else{
-                $insertNoteSql = "INSERT INTO note(board_id,note_creator,note_editor,note_title,note_category,note_content,note_modified) VALUES('$board_id','$note_creator','$note_creator','$note_title',0,'$note_content','$note_modified')";
-                mysqli_query($conn,$insertNoteSql);
+                $updateNoteSql = "UPDATE note SET note_editor='$note_editor',note_title='$note_title',note_category='0',note_content='$note_content',note_modified='$note_modified' WHERE note_id='$note_id';";
+                mysqli_query($conn,$updateNoteSql);
             }
         }
         else{
@@ -36,7 +37,7 @@ if(isset($_POST['addnote-submit'])){
         }
     }
     
-    header("Location: ../noteboard.php?id=".$board_id);
+    header("Location: ../note_view.php?note_id=".$note_id."&id=".$board_id);
 }
 else{
     header("Location: ../index.php");

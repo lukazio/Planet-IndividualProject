@@ -16,8 +16,6 @@ if(isset($_POST['inviteuser-submit'])){
         $checkUserResult = mysqli_query($conn,$checkUserSql);
         
         if(mysqli_num_rows($checkUserResult) > 0){
-            //Check if invite_email is a user that has already joined or not
-            //Also check if recipient user already has an identical invitation or not
             $checkUserRow = mysqli_fetch_assoc($checkUserResult);
             
             //Check if user has already joined or not
@@ -28,7 +26,11 @@ if(isset($_POST['inviteuser-submit'])){
             $checkInvitationSql = "SELECT * FROM invite WHERE invite_board='$inviteBoard' AND invite_to='$inviteEmail';";
             $checkInvitationResult = mysqli_query($conn,$checkInvitationSql);
             
-            if(mysqli_num_rows($checkUserJoinedResult) == 0 && mysqli_num_rows($checkInvitationResult) == 0){
+            //Check if user is the noteboard owner or not
+            $checkOwnerSql = "SELECT * FROM noteboard WHERE board_id='$inviteBoard' AND board_owner='".$checkUserRow['user_id']."';";
+            $checkOwnerResult = mysqli_query($conn,$checkOwnerSql);
+            
+            if(mysqli_num_rows($checkUserJoinedResult) == 0 && mysqli_num_rows($checkInvitationResult) == 0 && mysqli_num_rows($checkOwnerResult) == 0){
                 //Successfully invited user
                 $inviteDatetime = date('Y-m-d H:i:s');
                 $insertInviteSql = "INSERT INTO invite(invite_board,invite_to,invite_from,invite_msg,invite_datetime) VALUES('$inviteBoard','$inviteEmail','$inviteFrom','$inviteMsg','$inviteDatetime');";

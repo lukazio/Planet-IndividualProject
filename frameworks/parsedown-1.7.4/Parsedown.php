@@ -661,6 +661,8 @@ class Parsedown
                     'name' => 'blockquote',
                     'handler' => 'lines',
                     'text' => (array) $matches[1],
+                    'attributes' => array(
+                        'class' => 'blockquote'),
                 ),
             );
 
@@ -1242,6 +1244,7 @@ class Parsedown
             'element' => array(
                 'name' => 'img',
                 'attributes' => array(
+                    'class' => 'img-fluid',
                     'src' => $Link['element']['attributes']['href'],
                     'alt' => $Link['element']['text'],
                 ),

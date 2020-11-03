@@ -19,8 +19,8 @@ if($_GET['category'] != 0){
                         echo '<h6 class="card-header text-secondary">'.$categoryName.'</h6>';
                     }
                         
-                     echo '<div class="card-body">'
-                            . '<a href="" class="card-text font-weight-bold stretched-link text-dark">'.$row_filtered['note_title'].'</a>'
+                    echo '<div class="card-body">'
+                            . '<a href="note_view.php?note_id='.$row_filtered['note_id'].'&id='.$board_id.'" class="card-text font-weight-bold stretched-link text-dark">'.$row_filtered['note_title'].'</a>'
                             . '<p class="card-text text-secondary mt-2">'
                                 . '<span><i class="fa fa-fw fa-user" aria-hidden="true"></i> '.$row_filtered['note_creator'].'</span><br>'
                                 . '<span><i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i> '.$row_filtered['note_editor'].'</span>'
@@ -49,8 +49,8 @@ else{
                         echo '<h6 class="card-header text-secondary">'.$categoryName.'</h6>';
                     }
                         
-                     echo '<div class="card-body">'
-                            . '<a href="" class="card-text font-weight-bold stretched-link text-dark">'.$row['note_title'].'</a>'
+                    echo '<div class="card-body">'
+                            . '<a href="note_view.php?note_id='.$row['note_id'].'&id='.$board_id.'" class="card-text font-weight-bold stretched-link text-dark">'.$row['note_title'].'</a>'
                             . '<p class="card-text text-secondary mt-2">'
                                 . '<span><i class="fa fa-fw fa-user" aria-hidden="true"></i> '.$row['note_creator'].'</span><br>'
                                 . '<span><i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i> '.$row['note_editor'].'</span>'
