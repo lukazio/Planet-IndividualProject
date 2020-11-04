@@ -61,7 +61,7 @@ $currentUserId = $userIdResult['user_id'];
         //Check if valid noteboard ID or not, print error if invalid
         if($error_code == 1){
             echo '<h1 class="text-center text-info">Invalid noteboard ID</h1>';
-            echo '<div class="text-center"><a class="h4" href="index.php">Click to return to homepage</a></div>';
+            echo '<div class="text-center"><a class="h4 text-white" href="index.php">Click here to return to homepage</a></div>';
         }
         else{
             //SQLs to check if user belongs or owns this noteboard or not
@@ -75,7 +75,7 @@ $currentUserId = $userIdResult['user_id'];
             
             if($error_code == 2){
                 echo '<h1 class="text-center text-info">You do not have permission to view this noteboard</h1>';
-                echo '<div class="text-center"><a class="h4" href="index.php">Click to return to homepage</a></div>';
+                echo '<div class="text-center"><a class="h4 text-white" href="index.php">Click to return to homepage</a></div>';
             }
             else{
                 //Finally no problems! Code to show noteboard UI and get all notes in it

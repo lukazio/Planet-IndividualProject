@@ -68,14 +68,14 @@ $currentUserId = $userIdResult['user_id'];
             <!-- CONTROL ROW -->
             <div class="row">
                 <div class="col-6 p-0">
-                    <a href="noteboard.php?id=<?php echo $board_id; ?>" class="btn btn-info" data-toggle-tooltip="tooltip" data-placement="right" title="Back to noteboard"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                    <a href="noteboard.php?id=<?php echo $board_id; ?>" class="btn btn-lg btn-info" data-toggle-tooltip="tooltip" data-placement="right" title="Back to noteboard"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                 </div>
                 <div class="col-6 text-right p-0">
                     <form action="action/deletenote_action.php" method="post">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editNoteModal" data-toggle-tooltip="tooltip" data-placement="bottom" title="Edit note"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#editNoteModal" data-toggle-tooltip="tooltip" data-placement="bottom" title="Edit note"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             <input type="hidden" name="board_id" value="<?php echo $board_id; ?>">
-                            <button type="submit" class="btn btn-danger" name="deletenote-submit" value="<?php echo $note_id; ?>" onclick="return confirm('Are you sure you want to delete this note?')" data-toggle-tooltip="tooltip" data-placement="bottom" title="Delete note"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button type="submit" class="btn btn-lg btn-danger" name="deletenote-submit" value="<?php echo $note_id; ?>" onclick="return confirm('Are you sure you want to delete this note?')" data-toggle-tooltip="tooltip" data-placement="bottom" title="Delete note"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </div>
                     </form>
                     

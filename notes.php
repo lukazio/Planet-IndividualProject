@@ -6,7 +6,7 @@ $board_id = $_GET['id'];
 
 if($_GET['category'] != 0){
     $category = $_GET['category'];
-    $getNotesFilteredSql = "SELECT * FROM note WHERE board_id='$board_id' AND note_category='$category' ORDER BY note_modified DESC;";
+    $getNotesFilteredSql = "SELECT * FROM note WHERE board_id='$board_id' AND note_category='$category' ORDER BY note_id DESC;";
     $getNotesFilteredResult = mysqli_query($conn,$getNotesFilteredSql);
     
     if(mysqli_num_rows($getNotesFilteredResult) > 0){
@@ -36,7 +36,7 @@ if($_GET['category'] != 0){
     }
 }
 else{
-    $getNotesSql = "SELECT * FROM note WHERE board_id='$board_id' ORDER BY note_modified DESC;";
+    $getNotesSql = "SELECT * FROM note WHERE board_id='$board_id' ORDER BY note_id DESC;";
     $getNotesResult = mysqli_query($conn,$getNotesSql);
     
     if(mysqli_num_rows($getNotesResult) > 0){
